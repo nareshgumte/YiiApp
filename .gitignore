@@ -1,0 +1,6 @@
+﻿# Git Ignore for YiiApp Project Spiros Kabasakalis.@2012
+
+.idea
+assets/*
+backup.bat
+push_to_github.bat
