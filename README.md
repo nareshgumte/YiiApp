@@ -9,7 +9,7 @@ Tested with version 1.1.12
 ##[Live Demo](http://yiiapp.kabasakalis.tk/)
 
 ## Set it up
-- Clone the git repo - `git clone git://github.com/drumaddict/YiiApp.git` - or [download it](https://github.com/drumaddict/YiiApp/zipball/master)
+- Clone the git repo - `git clone git://github.com/drumaddict/YiiApp.git` - or [download it](https://github.com/drumaddict/YiiApp/archive/master.zip)
 - Hook up your Yii framework path in index.php.
 - Fill in database info in config/main.php and config/console.php
 - Fill in your recaptcha private and public keys,if you want to use [recaptcha](http://www.google.com/recaptcha).
