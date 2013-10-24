@@ -97,7 +97,7 @@ return array(
         'db' => (!APP_DEPLOYED) ?
             array( //LOCALHOST
                 'class' => 'CDbConnection',
-                'connectionString' => 'mysql:host=localhost;dbname=angyii',
+                'connectionString' => 'mysql:host=localhost;dbname=yiiapp',
                 'username' => 'root',
                 'password' => '1',
                 'charset' => 'UTF8',
@@ -110,9 +110,9 @@ return array(
             ):
         array(       //SERVER
             'class' => 'CDbConnection',
-                              'connectionString' => 'mysql:host=mysql.2freehosting.com;dbname=u311885733_yiiapp',
-                               'username' => 'u311885733_user',
-                               'password' => '211171',
+                              'connectionString' => 'mysql:host=[MYSQL HOST];dbname=[DBNAME]',
+                               'username' => '[USERNAME]',
+                               'password' => '[PASSWORD]',
                                'charset' => 'UTF8',
                                'tablePrefix' => '',
                                'emulatePrepare' => true,
@@ -157,10 +157,10 @@ return array(
     'params' => array(
     'fromEmail' => 'admin@gmail.com',
     'replyEmail' => 'reply-to@gmail.com',
-    'myEmail' => 'kabasakalis@gmail.com',
-    'gmail_password' => 'ruti211171',
-    'recaptcha_private_key' => '6Lcq-OgSAAAAAOmkMd1B6r2utVrltVgOcZ55e2LZ', // captcha will not work without these keys!
-    'recaptcha_public_key' => '6Lcq-OgSAAAAACrg1I2mh6drwvrdWsX9zaeenFLu', //http://www.google.com/recaptcha
+    'myEmail' => '[MY  EMAIL]',
+    'gmail_password' => 'MY  GMAIL PASSWORD',
+    'recaptcha_private_key' => '', // captcha will not work without these keys!
+    'recaptcha_public_key' => '', //http://www.google.com/recaptcha
     'contactRequireCaptcha' => true,
 
     //Choose Bootswatch skin.'none' means default bootstrap theme.See http://bootswatch.com/
