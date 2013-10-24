@@ -1,11 +1,18 @@
 <?php
 /**
- *  class TestCommand
- * Created by Spiros Kabasakalis.
- * Date: 8/15/12
- * Time: 10:18 AM
- * yiic clear_inactive delete --days=2
+ * Clear_inactiveCommand.php  class file.
  *
+ * Deletes users that have been not activated for longer than number of days specified.
+ * Run this as a cron job
+ *
+ * @author Spiros Kabasakalis <kabasakalis@gmail.com>
+ * @copyright Copyright &copy; Spiros Kabasakalis 2013-
+ * @link  InfoWebSphere,http://iws.kabasakalis.gr
+ * @link  YiiLab,http://yiilab.kabasakalis.tk
+ * @link  Github https://github.com/drumaddict
+ * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
+ * @package
+ * @version
  */
 
 class Clear_inactiveCommand extends CConsoleCommand

@@ -23,13 +23,14 @@ class RegisterForm extends CFormModel
             array('username', 'match', 'allowEmpty' => false, 'pattern' => '/[A-Za-z0-9\x80-\xFF]+$/'),
             array('email', 'email'),
             array('email', 'length', 'min' => User::EMAIL_MIN, 'max' => User::EMAIL_MAX),
-            array('new_password,password_confirm', 'length', 'min' => User::PASSWORD_MIN, 'max' => User::USERNAME_MAX),
+            array('new_password,password_confirm', 'length', 'min' => User::PASSWORD_MIN, 'max' => User::PASSWORD_MAX),
+            array('username', 'length', 'min' => User::USERNAME_MIN, 'max' => User::USERNAME_MAX),
             array('username,email', 'unique', 'className' => 'User', 'skipOnError' => false),
             array('password_confirm', 'compare', 'compareAttribute' => 'new_password'),
-           /*array('verify_code',
+           array('verify_code',
                                          'application.extensions.recaptcha.EReCaptchaValidator',
                                          'privateKey'=>Yii::app()->params['recaptcha_private_key']),
-           array('verify_code', 'captcha'),*/
+        //   array('verify_code', 'captcha'),
         );
     }
 

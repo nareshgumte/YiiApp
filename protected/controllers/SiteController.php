@@ -1,10 +1,15 @@
 <?php
 /**
- * SiteController.php
+ * SiteController.php  class file.
  *
- * @author: spiros kabasakalis <kabasakalis@gmail.com>
- * Date: 11/15/12
- * Time: 22:46 PM
+ * @author Spiros Kabasakalis <kabasakalis@gmail.com>
+ * @copyright Copyright &copy; Spiros Kabasakalis 2013-
+ * @link  InfoWebSphere,http://iws.kabasakalis.gr
+ * @link  YiiLab,http://yiilab.kabasakalis.tk
+ * @link  Github https://github.com/drumaddict
+ * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
+ * @package
+ * @version 2.0.0
  */
 
 class SiteController extends Controller
@@ -36,10 +41,9 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        // renders the view file 'protected/views/site/index.php'
-        // using the default layout 'protected/views/layouts/main.php'
-        $this->render('index');
-
+        // renders the front page file associated with the  defined layout.
+        //  Layout is specified in config/main.php
+        $this->render('index_'.app()->layout);
     }
 
 
@@ -77,7 +81,7 @@ class SiteController extends Controller
                   'contact',
                   'main3'
                 );
-                Yii::app()->user->setFlash('contact', '<strong>Message sent!   </strong>Thank you for contacting us. We will respond to you as soon as possible.');
+                Yii::app()->user->setFlash('success', '<strong>Message sent!   </strong>Thank you for contacting us. We will respond to you as soon as possible.');
                 $this->refresh();
             }
         }
@@ -89,20 +93,20 @@ class SiteController extends Controller
         $model = new RegisterForm();
 
         if (isset($_POST['ajax']) && $_POST['ajax'] === 'register-form') {
-            echo CActiveForm::validate($model, array('username', 'password'));
+            echo CActiveForm::validate($model, array('username', 'password','new_password', 'password_confirm','verify_code'));
             Yii::app()->end();
         }
 
         if (isset($_POST['RegisterForm'])) {
             $model->attributes = $_POST['RegisterForm'];
-            if ($model->validate(array('email', 'username', 'new_password', 'password_confirm'))) {
+            if ($model->validate(array('email', 'username', 'new_password', 'password_confirm','verify_code'))) {
                 $user = new User();
                 $user->email = $_POST['RegisterForm']['email'];
                 $user->username = $_POST['RegisterForm']['username'];
                 $user->password = $_POST['RegisterForm']['new_password'];
 
                 if ($user->save()) {
-                    //send email         activation key has been generated on beforeValidate function in User class
+                    //send email     activation key has been generated on beforeValidate function in User class
                     $activation_url = $this->createAbsoluteUrl('/site/activate', array('key' => $user->activation_key, 'email' => $user->email));
 
                     if (sendHtmlEmail(
@@ -121,7 +125,7 @@ class SiteController extends Controller
                     } else {
                         $user->delete();
                         $msg = Yii::t('register', 'Error.Activation email could not be sent.Please register again.');
-                        Yii::app()->user->setFlash('error', $msg);
+                        Yii::app()->user->setFlash('danger', $msg);
                         $this->redirect(bu() . '/site/register');
                     }
                 }
@@ -142,7 +146,7 @@ class SiteController extends Controller
             $user = User::model()->find($criteria);
             if (!$user) {
                 $errormsg = Yii::t('passwordreset', 'No user with this email in our records');
-                Yii::app()->user->setFlash('error', $errormsg);
+                Yii::app()->user->setFlash('danger', $errormsg);
                 $this->refresh();
             }
             $key = $user->generate_activation_key();
@@ -165,7 +169,7 @@ class SiteController extends Controller
                 $this->refresh();
             } else {
                 $errormsg = Yii::t('passwordreset', 'We could not email you the password reset link');
-                Yii::app()->user->setFlash('info', $errormsg);
+                Yii::app()->user->setFlash('danger', $errormsg);
                 $this->refresh();
             }
         }
@@ -191,7 +195,7 @@ class SiteController extends Controller
             if (!$user) {
                 $errormsg = Yii::t('passwordreset', 'Error,your account information was not found.
                 Your reset token has probably been used or  expired.Please repeat the password reset process.');
-                Yii::app()->user->setFlash('error', $errormsg);
+                Yii::app()->user->setFlash('danger', $errormsg);
                 $this->refresh();
             }
             $user->password = $new_password;
@@ -203,7 +207,7 @@ class SiteController extends Controller
                 $this->redirect(bu() . '/site/login');
             } else {
                 $error = Yii::t('passwordreset', 'Error,could not reset your password.');
-                Yii::app()->user->setFlash('error', $error);
+                Yii::app()->user->setFlash('danger', $error);
                 $this->refresh();
             }
         }
@@ -233,7 +237,7 @@ class SiteController extends Controller
             $criteria->params = array(':email' => $email);
             $user = User::model()->find($criteria);
             $user->delete();
-            Yii::app()->user->setFlash('error', $errormsg);
+            Yii::app()->user->setFlash('danger', $errormsg);
             $this->redirect(bu() . '/site/register');
         }
     }

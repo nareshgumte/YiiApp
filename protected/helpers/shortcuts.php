@@ -1,4 +1,11 @@
 <?php
+/**
+ * shortcuts.php   file.
+ *
+ * Collection of shortcut functions.
+ */
+
+
 
 //FIREPHP
 function fb($object,$label=null,$type=null,$options=null){

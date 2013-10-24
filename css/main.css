@@ -1,57 +1,24 @@
 
-
-/* ==========================================================================
-   Author's custom styles
+/* ==|== Custom CSS ========================================
+   Please define your custom styles after this section.
    ========================================================================== */
 
-.navbar .brand {
-    float: right!important;
+.page-min-height{
+    min-height: 650px;*/
+    }
+.pulldown{
+    margin-top: 80px;
 }
 
-#sidebar-img {
+#switchform-container   {
+    position:absolute;
     float:right;
-    margin: 20px;
+    top:60px;
+    right:0;
+    z-index:9999;
+    min-width:0;
+    width:8%;
 }
-
-/*Login LogOut*/
-#topmenu{
-background: none repeat scroll 0 0 transparent;
-    line-height: 16px;
-    margin: 0 5px 0 auto;
-    position: relative;
-    text-align: right;
-}
-#topmenu a{
-    color: rgb(64, 255, 240);
-text-decoration: none;
-}
-#topmenu a:hover{
-    color: #ffffff;
-}
-#topmenu div{
-   position:absolute;
-}
-#topmenu ul {
-    height: 31px;
-    margin:  0 0 0 1px;
-}
-#topmenu ul li {
-    display: inline;
-    font-size: 0.9em;
-    line-height: 31px;
-    margin: 0 5px;
-}
-
-#topmenu #loggedin_user {
-color: #4cffe1;
-}
-
-
-
-
-
-
-
 
 
 

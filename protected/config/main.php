@@ -1,5 +1,4 @@
 <?php
-
 // uncomment the following to define a path alias
 // Yii::setPathOfAlias('local','path/to/local-folder');
 
@@ -8,12 +7,17 @@
 return array(
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
     'name' => 'My Web Application',
+    //'theme'=>'bootstrap2',
+    //Available layouts for Bootstrap v2.3.2 :starter,hero,fluid,carousel,justified-nav,marketing-narrow. (uncomment 'theme'=>'bootstrap2' to use these).
+    // Available layouts for Bootstrap v3.0.0 :starter-template,offcanvas,carousel,justified-nav,jumbotron,jumbotron-narrow.
+    'layout' => 'jumbotron',
 
     // preloading 'log' component
     'preload' => array(
         'log',
         'input', //Filter
-        'bootstrap', // preload the bootstrap component
+        'bootstrap', // preload the bootstrap component,comment this out if you don't use bootstrap2 theme.
+        //(Yiistrap and YiiWheels work with bootstrap 2).
     ),
 
     // autoloading model and component classes
@@ -21,13 +25,16 @@ return array(
         'application.models.*',
         'application.components.*',
         'application.extensions.bootstrap.components.*',
+        'application.extensions.bootstrap.helpers.TbHtml',
         //DEBUGGING STUFF
         'application.vendors.FirePHPCore.FirePHP',
         'application.vendors.FirePHPCore.FB',
     ),
     'aliases' => array(
-        //yiibooster
-        'bootstrap' => 'webroot.protected.extensions.bootstrap',
+        //yiistrap
+        'bootstrap' => realpath(__DIR__ . DS.'..'.DS.'extensions'.DS.'bootstrap'),
+        // yiiwheels configuration
+        'yiiwheels' => 'webroot.protected.extensions.yiiwheels'
     ),
     'modules' => array(
         // uncomment the following to enable the Gii tool
@@ -35,7 +42,8 @@ return array(
         'gii' => array(
             'class' => 'system.gii.GiiModule',
             'password' => '1',
-            'generatorPaths' => array(//    'bootstrap.gii', // since 0.9.1
+            'generatorPaths' => array(
+                'bootstrap.gii'
             ),
             // If removed, Gii defaults to localhost only. Edit carefully to taste.
             'ipFilters' => array('127.0.0.1', '::1'),
@@ -61,15 +69,14 @@ return array(
             'cleanGet' => true,
             'cleanMethod' => 'stripClean'
         ),
-        //yiibooster
+        // yiistrap configuration
         'bootstrap' => array(
-            //KSBootstrap extends Bootstrap just to load assets directly  from a folder in  webroot (yiibooster_assets),and
-            //avoid publishing which I hate.
-            'class' => 'ext.bootstrap.components.KSBootstrap',
-            'coreCss' => true,
-            'responsiveCss' => true
+            'class' => 'bootstrap.components.KTbApi',
         ),
-
+        // yiiwheels configuration
+        'yiiwheels' => array(
+            'class' => 'yiiwheels.YiiWheels',
+        ),
         // uncomment the following to enable URLs in path-format
 
         'urlManager' => array(
@@ -86,80 +93,86 @@ return array(
         /*'db'=>array(
             'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
         ),*/
-        // uncomment the following to use a MySQL database
 
-        'db'=>(!APP_DEPLOYED)?
-                                                         array(    //LOCALHOST
-                                                        'class' => 'CDbConnection',
-                                                        'connectionString' => 'mysql:host=yii.gr ;dbname=yii_test   ',
-                                                        'username' => 'root',
-                                              			 'password' => '',
-                                                         'charset' => 'UTF8',
-                                                         'tablePrefix'=>'', // even empty table prefix required!!!
-                  		                               'emulatePrepare' => true,
-                  			                           'enableProfiling' => true,
-                                                         'schemaCacheID' => 'cache',
-                                                         'queryCacheID'=> 'cache',
-                                                         'schemaCachingDuration' => 120
-                  	                                    ):   //SERVER
-                                                        array(
-                                                         'class' => 'CDbConnection',
-                                                            'connectionString' => 'mysql:host=;dbname=',
-                                                                                                       'username' => '',
-                                                                                                        'password' => '',
-                                                        'charset' => 'UTF8',
-                                                        'tablePrefix' => '',
-                                                        'emulatePrepare' => true,
-                                                     //   'enableProfiling' => true,
-                                                       'schemaCacheID' => 'cache',
-                                                       'schemaCachingDuration' => 3600
+        'db' => (!APP_DEPLOYED) ?
+            array( //LOCALHOST
+                'class' => 'CDbConnection',
+                'connectionString' => 'mysql:host=localhost;dbname=angyii',
+                'username' => 'root',
+                'password' => '1',
+                'charset' => 'UTF8',
+                'tablePrefix' => '', // even empty table prefix required!!!
+                'emulatePrepare' => true,
+                'enableProfiling' => true,
+                'schemaCacheID' => 'cache',
+                'queryCacheID' => 'cache',
+                'schemaCachingDuration' => 120
+            ):
+        array(       //SERVER
+            'class' => 'CDbConnection',
+                              'connectionString' => 'mysql:host=mysql.2freehosting.com;dbname=u311885733_yiiapp',
+                               'username' => 'u311885733_user',
+                               'password' => '211171',
+                               'charset' => 'UTF8',
+                               'tablePrefix' => '',
+                               'emulatePrepare' => true,
+                               //   'enableProfiling' => true,
+                              'schemaCacheID' => 'cache',
+                             'schemaCachingDuration' => 3600
                                               ),
 
 
         'errorHandler' => array(
-            // use 'site/error' action to display errors
-            'errorAction' => 'site/error',
-        ),
+    // use 'site/error' action to display errors
+    'errorAction' => 'site/error',
+),
         'log' => array(
-            'class' => 'CLogRouter',
-            'routes' => array(
-                array(
-                    'class' => 'CFileLogRoute',
-                    'levels' => 'error, warning',
-                ),
-                // uncomment the following to show log messages on web pages
-                /*
-                array(
-                    'class'=>'CWebLogRoute',
-                ),
-                */
-            ),
+    'class' => 'CLogRouter',
+    'routes' => array(
+        array(
+            'class' => 'CFileLogRoute',
+            'levels' => 'error, warning',
         ),
+        // uncomment the following to show log messages on web pages
+        /*
+        array(
+            'class'=>'CWebLogRoute',
+        ),
+        */
+    ),
+),
         'clientScript' => array(
-            'class' => 'CClientScript',
-            'scriptMap' => array(
-                'jquery.js' => false,
-                'jquery.min.js' => false
-            ),
-            'coreScriptPosition' => CClientScript::POS_END,
-        ),
-
+    'class' => 'CClientScript',
+    'scriptMap' => array(
+        //don't allow the framework to load jQuery,we load it manually,(see components/Controller.php).
+        'jquery.js' => false,
+        //'jquery.min.js' => false
+    ),
+    'coreScriptPosition' => CClientScript::POS_END,
+),
     ),
 
     // application-level parameters that can be accessed
     // using Yii::app()->params['paramName']
     'params' => array(
-        'fromEmail' => 'admin@gmail.com',
-        'replyEmail' => 'reply-to@gmail.com',
-        'myEmail'=>'[Your Gmail email]',
-        'gmail_password'=>'[Your Gmail password]',
-        // 'recaptcha_private_key'=>'[FILL IN YOUR KEY]',// captcha will not work without these keys!
-        //  'recaptcha_public_key'=>'[FILL IN YOUR KEY]',http://www.google.com/recaptcha
-        'contactRequireCaptcha' => false,
-        //Choose Bootswatch theme,default is default bootstrap theme.See http://bootswatch.com/
-        //Options:default,slate,amelia,cerulean,cyborg, journal,readable,simplex,spacelab,superhero,united
-        'bootswatch_theme' => 'slate'
-        //'bootswatch_theme'=>'default'
+    'fromEmail' => 'admin@gmail.com',
+    'replyEmail' => 'reply-to@gmail.com',
+    'myEmail' => 'kabasakalis@gmail.com',
+    'gmail_password' => 'ruti211171',
+    'recaptcha_private_key' => '6Lcq-OgSAAAAAOmkMd1B6r2utVrltVgOcZ55e2LZ', // captcha will not work without these keys!
+    'recaptcha_public_key' => '6Lcq-OgSAAAAACrg1I2mh6drwvrdWsX9zaeenFLu', //http://www.google.com/recaptcha
+    'contactRequireCaptcha' => true,
 
-    ),
+    //Choose Bootswatch skin.'none' means default bootstrap theme.See http://bootswatch.com/
+    //Options for Bootstrap2:(make sure you have 'theme'=>'bootstrap2' in this file.)
+    //none,amelia,cerulean,cosmo,cyborg,flatly,journal,readable,simplex,slate,spacelab,spruce,superhero,united
+    'bootswatch2_skin' => 'none',
+
+    //Options for Bootstrap3:(no theme specified,default view files from protected/views are used)
+    //none,amelia,cerulean,cosmo,cyborg,flatly,journal,readable,simplex,slate,spacelab,united
+    'bootswatch3_skin' => 'cyborg',
+
+    //render a form to try out layouts and skins.
+    'render_switch_form' => true
+),
 );

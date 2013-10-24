@@ -1,15 +1,7 @@
 <?php
-/**
- * UserIdentity.php
- *
- * This class represents a user identity and this is able to authenticate a user.
- *
- * @author: antonio ramirez <antonio@clevertech.biz>
- * Date: 7/22/12
- * Time: 8:36 PM
- *
- *
- */
+
+
+
 class UserIdentity extends CUserIdentity {
 	/**
 	 * @var integer id of logged user

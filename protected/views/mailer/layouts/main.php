@@ -13,7 +13,7 @@
             <?php echo $content; ?>
             </div>
             <div style="margin-top: 40px;">
-            <em >Copyright &copy; 2012  <?php echo Yii::app() ->name;?> , All rights reserved.</em>
+            <em >Copyright &copy; 2013  <?php echo Yii::app() ->name;?> , All rights reserved.</em>
             </div>
         </center>
     </body>

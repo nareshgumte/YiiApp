@@ -1,10 +1,17 @@
 <?php
 /**
- * Created by JetBrains PhpStorm.
- * User: Spiros
- * Date: 5/28/12
- * Time: 12:39 PM
- * To change this template use File | Settings | File Templates.
+ * utils.php   file.
+ *
+ * Collection of utility functions
+ *
+ * @author Spiros Kabasakalis <kabasakalis@gmail.com>
+ * @copyright Copyright &copy; Spiros Kabasakalis 2013-
+ * @link  InfoWebSphere,http://iws.kabasakalis.gr
+ * @link  YiiLab,http://yiilab.kabasakalis.tk
+ * @link  Github https://github.com/drumaddict
+ * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
+ * @package
+ * @version 2.0.0
  */
 
  function sendHtmlEmail($to, $fromname,$replyemail, $subject, $params,$view,$layout=null,$viewspath=null,$layoutspath=null )

@@ -43,7 +43,7 @@ class User extends CActiveRecord
     const USERNAME_MIN = 3;
     const USERNAME_MAX = 45;
     const EMAIL_MAX = 125;
-    const EMAIL_MIN = 3;
+    const EMAIL_MIN = 5;
 
 
     /**
